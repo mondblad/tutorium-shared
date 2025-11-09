@@ -5,15 +5,14 @@ option csharp_namespace = "Tutorium.Shared";
 package user;
 
 service User {
-  rpc GetTest(GetTestRequest) returns (GetTestResponse);
+  rpc GetOrCreateUser(GetOrCreateUserRequest) returns (GetOrCreateUserResponse);
 }
 
-message GetTestRequest {
-  string userId = 1;
-  string index = 2;
+message GetOrCreateUserRequest {
+  string Email = 1;
+  string Password = 2;
 }
 
-message GetTestResponse {
-	string state = 1;
-	string message = 2;
+message GetOrCreateUserResponse {
+	int32 UserId = 1;
 }
