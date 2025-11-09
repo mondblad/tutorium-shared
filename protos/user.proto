@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "Tutorium.Shared";
+
+package user;
+
+service User {
+  rpc GetTest(GetTestRequest) returns (GetTestResponse);
+}
+
+message GetTestRequest {
+  string userId = 1;
+  int index = 2;
+}
+
+message GetTestResponse {
+	string state = 1;
+	string message = 2;
+}
