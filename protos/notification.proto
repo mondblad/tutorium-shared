@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "Tutorium.Grpc.Notification";
+
+package notification;
+
+service NotificationService {
+	rpc SendEmailVerificationCode (SendEmailVerificationCodeRequest) returns (google.protobuf.Empty);
+}
+
+message SendEmailVerificationCodeRequest {
+  string ToEmail = 1;
+  string Code = 2;
+}
