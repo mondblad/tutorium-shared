@@ -6,7 +6,7 @@ option csharp_namespace = "Tutorium.Grpc.Notification";
 
 package notification;
 
-service NotificationService {
+service NotificationGrpc {
 	rpc SendEmailVerificationCode (SendEmailVerificationCodeRequest) returns (google.protobuf.Empty);
 }
 
