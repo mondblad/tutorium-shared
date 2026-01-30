@@ -1,18 +1,17 @@
 syntax = "proto3";
 
-option csharp_namespace = "Tutorium.Shared";
+option csharp_namespace = "Tutorium.Grpc.User";
 
-package user;
+package userGrpc;
 
-service User {
-  rpc GetOrCreateUser(GetOrCreateUserRequest) returns (GetOrCreateUserResponse);
+service UserGrpc {
+  rpc IsUserExists (UserExistsRequest) returns (UserExistsResponse);
 }
 
-message GetOrCreateUserRequest {
-  string Email = 1;
-  string Password = 2;
+message UserExistsRequest {
+  string email = 1;
 }
 
-message GetOrCreateUserResponse {
-	int32 UserId = 1;
+message UserExistsResponse {
+  bool exists = 1;
 }
