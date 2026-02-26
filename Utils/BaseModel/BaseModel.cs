@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Tutorium.Shared.Utils.BaseModel
+﻿namespace Tutorium.Shared.Utils.BaseModel
 {
-    public abstract class BaseModel
+    public interface IBaseModel
     {
-        [Key]
+        public int Id { get; set; }
+    }
+
+    public abstract class BaseModel : IBaseModel
+    {
         public int Id { get; set; }
     }
 }
