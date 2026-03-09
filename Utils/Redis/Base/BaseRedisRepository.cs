@@ -9,9 +9,9 @@ namespace Tutorium.Shared.Utils.Redis.Base
     {
         private readonly IDatabase _db;
 
-        public BaseRedisRepository(IConnectionMultiplexer redis)
+        public BaseRedisRepository(IDatabase redisDb)
         {
-            _db = redis.GetDatabase();
+            _db = redisDb;
         }
 
         public async Task Add(T model) => await SaveOrUpdateAsync(model);
