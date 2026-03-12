@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Grpc.AspNetCore.Server;
+using Microsoft.AspNetCore.Http;
 
 namespace Tutorium.Shared.Api.Sessions
 {
@@ -13,10 +14,29 @@ namespace Tutorium.Shared.Api.Sessions
 
         public async Task InvokeAsync(HttpContext context)
         {
+            var path = context.Request.Path;
+            if (path.StartsWithSegments("/swagger"))
+            {
+               await _next(context);
+               return;
+            }
+
+            
+
             var endpoint = context.GetEndpoint();
+            if (endpoint is null)
+            {
+                await _next(context);
+                return;
+            }
 
-            var requireUser = endpoint?.Metadata.GetMetadata<AllowUnauthenticatedAttribute>();
+            if (endpoint.Metadata.GetMetadata<GrpcMethodMetadata>() != null)
+            {
+                await _next(context);
+                return;
+            }
 
+            var requireUser = endpoint.Metadata.GetMetadata<AllowUnauthenticatedAttribute>();
             if (requireUser == null)
             {
                 var userId = context.Request.Headers[SessionConstants.HeaderUserIdName];
